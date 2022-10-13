@@ -23,7 +23,7 @@ str(AL)  #view structure of data ##
 AL <- mutate(AL, Julian=format(DATE,"%j"))
 
 #omit NA in temperature recordings 
-AL<-AL[complete.cases(AL[,7]),]
+AL<-AL[complete.cases(AL[,4]),]
 
 ## monthly mean low temp ##
 ## update this after creating julian dates ##
@@ -34,7 +34,7 @@ AL_TMAX <- AL %>%
 ## create graph for temps by month of year ##
 
 AL_TMAX %>%
-  filter(year>1980) %>%
+  filter(year>1950) %>%
   ggplot(aes(x = year, y = total)) +
   geom_point(color = "grey") +
   geom_smooth(stat="smooth",method="lm")+
@@ -51,7 +51,7 @@ AL_37.7 <- AL %>%
 
 #plot number of days above 37.7
 AL_37.7 %>%
-  filter(as.integer(year)>1980)%>%
+  filter(as.integer(year)>1950)%>%
   filter(n>0)%>%
   ggplot(aes(x = year, y = n)) +
   geom_point(color = "grey") +
@@ -67,61 +67,6 @@ AL_37.7 %>%
   filter(year>1960)
 
 ##################################
-####Indiana segment starts here###
-##################################
-
-str(IN)  #view structure of data ##
-
-## create column for julian date##
-## trying to replicate https://stackoverflow.com/questions/21414847/convert-a-date-vector-into-julian-day-in-r##
-IN <- mutate(IN, Julian=format(DATE,"%j"))
-
-#omit NA in temperature recordings 
-IN<-IN[complete.cases(IN[,7]),]
-
-## monthly mean low temp ##
-## update this after creating julian dates ##
-IN_TMAX <- IN %>%
-  group_by(year=lubridate::floor_date(DATE, "year")) %>%
-  summarise(total = max(TMAX))
-
-## create graph for temps by month of year ##
-
-IN_TMAX %>%
-  filter(year>1980) %>%
-  ggplot(aes(x = year, y = total)) +
-  geom_point(color = "grey") +
-  geom_smooth(stat="smooth",method="lm")+
-  labs(title = "Annual Highest Temperatures",
-       subtitle = "Hoosier National Forest, IN",
-       y= "Daily High Temperature (Celcius)",
-       x= "Year") + theme_bw(base_size = 15)
-
-
-#number of days above 37.7
-IN_37.7 <- IN %>%
-  group_by(year=lubridate::floor_date(DATE, "year")) %>%
-  summarise(n=sum(TMAX>37.7))
-
-#plot number of days above 37.7
-IN_37.7 %>%
-  filter(as.integer(year)>1980)%>%
-  filter(n>0)%>%
-  ggplot(aes(x = year, y = n)) +
-  geom_point(color = "grey") +
-  geom_smooth(method="lm")+
-  labs(title = "Number of Days >37.7",
-       subtitle = "Hoosier National Forest, IN",
-       y= "Number of Days",
-       x= "Year") + theme_bw(base_size = 15)
-
-
-IN_37.7 %>%
-  filter(n>0)%>%
-  filter(year>1960)
-
-
-##################################
 ####Tennessee segment starts here###
 ##################################
 
@@ -132,7 +77,7 @@ str(TN)  #view structure of data ##
 TN <- mutate(TN, Julian=format(DATE,"%j"))
 
 #omit NA in temperature recordings 
-TN<-TN[complete.cases(TN[,7]),]
+TN<-TN[complete.cases(TN[,4]),]
 
 ## monthly mean low temp ##
 ## update this after creating julian dates ##
@@ -176,6 +121,60 @@ TN_37.7 %>%
   filter(year>1960)
 
 ##################################
+####Indiana segment starts here###
+##################################
+
+str(IN)  #view structure of data ##
+
+## create column for julian date##
+## trying to replicate https://stackoverflow.com/questions/21414847/convert-a-date-vector-into-julian-day-in-r##
+IN <- mutate(IN, Julian=format(DATE,"%j"))
+
+#omit NA in temperature recordings 
+IN<-IN[complete.cases(IN[,4]),]
+
+## monthly mean low temp ##
+## update this after creating julian dates ##
+IN_TMAX <- IN %>%
+  group_by(year=lubridate::floor_date(DATE, "year")) %>%
+  summarise(total = max(TMAX))
+
+## create graph for temps by month of year ##
+
+IN_TMAX %>%
+  filter(year>1980) %>%
+  ggplot(aes(x = year, y = total)) +
+  geom_point(color = "grey") +
+  geom_smooth(stat="smooth",method="lm")+
+  labs(title = "Annual Highest Temperatures",
+       subtitle = "Hoosier National Forest, IN",
+       y= "Daily High Temperature (Celcius)",
+       x= "Year") + theme_bw(base_size = 15)
+
+
+#number of days above 37.7
+IN_37.7 <- IN %>%
+  group_by(year=lubridate::floor_date(DATE, "year")) %>%
+  summarise(n=sum(TMAX>37.7))
+
+#plot number of days above 37.7
+IN_37.7 %>%
+  filter(as.integer(year)>1980)%>%
+  filter(n>0)%>%
+  ggplot(aes(x = year, y = n)) +
+  geom_point(color = "grey") +
+  geom_smooth(method="lm")+
+  labs(title = "Number of Days >37.7",
+       subtitle = "Hoosier National Forest, IN",
+       y= "Number of Days",
+       x= "Year") + theme_bw(base_size = 15)
+
+
+IN_37.7 %>%
+  filter(n>0)%>%
+  filter(year>1960)
+
+##################################
 ####Michigan segment starts here###
 ##################################
 
@@ -186,7 +185,7 @@ str(MI)  #view structure of data ##
 MI <- mutate(MI, Julian=format(DATE,"%j"))
 
 #omit NA in temperature recordings 
-MI<-MI[complete.cases(MI[,7]),]
+MI<-MI[complete.cases(MI[,4]),]
 
 ## monthly mean low temp ##
 ## update this after creating julian dates ##
