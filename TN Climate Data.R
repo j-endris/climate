@@ -11,7 +11,7 @@ library(lubridate)
 ##temp<-read.csv("~/Library/CloudStorage/GoogleDrive-jendris@my.apsu.edu/.shortcut-targets-by-id/1p5eHgH8eX9-QjkyyA3uRz5Lk7ontMZtO/Rehm lab - General/Trees/5- Climate/Climate Data/Alabama.csv")
 setwd("~/Library/CloudStorage/GoogleDrive-jendris@my.apsu.edu/.shortcut-targets-by-id/1p5eHgH8eX9-QjkyyA3uRz5Lk7ontMZtO/Rehm lab - General/Trees/5- Climate/")
 
-TN <- read_csv("Indiana.csv")
+TN <- read_csv("Tennessee.csv")
 
 str(TN)  #view structure of data ##
 
@@ -20,7 +20,7 @@ str(TN)  #view structure of data ##
 TN <- mutate(TN, Julian=format(DATE,"%j"))
 
 #omit NA in temperature recordings 
-TN<-TN[complete.cases(TN[,7]),]
+TN<-TN[complete.cases(TN[,4]),]
 
 ## monthly mean low temp ##
 ## update this after creating julian dates ##
@@ -41,24 +41,24 @@ TN_TMAX %>%
        x= "Year") + theme_bw(base_size = 15)
 
 
-#number of days above 37.7
-TN_37.7 <- TN %>%
+#number of days above 32.2
+TN_32.2 <- TN %>%
   group_by(year=lubridate::floor_date(DATE, "year")) %>%
-  summarise(n=sum(TMAX>37.7))
+  summarise(n=sum(TMAX>32.2))
 
-#plot number of days above 37.7
-TN_37.7 %>%
+#plot number of days above 32.2
+TN_32.2 %>%
   filter(as.integer(year)>1980)%>%
   filter(n>0)%>%
   ggplot(aes(x = year, y = n)) +
   geom_point(color = "grey") +
   geom_smooth(method="lm")+
-  labs(title = "Number of Days >37.7",
+  labs(title = "Number of Days >32.2°C",
        subtitle = "Clarksville, TN",
        y= "Number of Days",
        x= "Year") + theme_bw(base_size = 15)
 
 
-TN_37.7 %>%
+TN_32.2 %>%
   filter(n>0)%>%
   filter(year>1960)

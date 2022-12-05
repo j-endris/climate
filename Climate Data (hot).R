@@ -31,6 +31,12 @@ AL_TMAX <- AL %>%
   group_by(year=lubridate::floor_date(DATE, "year")) %>%
   summarise(total = max(TMAX))
 
+###max temp by month May-Sep##
+AL_monthly_TMAX <- AL %>%
+  
+
+
+
 ## create graph for temps by month of year ##
 
 AL_TMAX %>%
@@ -38,31 +44,31 @@ AL_TMAX %>%
   ggplot(aes(x = year, y = total)) +
   geom_point(color = "grey") +
   geom_smooth(stat="smooth",method="lm")+
-  labs(title = "Annual Highest Temperatures",
+  labs(title = "Annual Highest Temperatures (°C)",
        subtitle = "Tuscaloosa, AL",
-       y= "Daily High Temperature (Celcius)",
+       y= "Temperature °C",
        x= "Year") + theme_bw(base_size = 15)
 
 
-#number of days above 37.7
-AL_37.7 <- AL %>%
+#number of days above 32.2
+AL_32.2 <- AL %>%
   group_by(year=lubridate::floor_date(DATE, "year")) %>%
-  summarise(n=sum(TMAX>37.7))
+  summarise(n=sum(TMAX>32.2))
 
-#plot number of days above 37.7
-AL_37.7 %>%
+#plot number of days above 32.2
+AL_32.2 %>%
   filter(as.integer(year)>1950)%>%
   filter(n>0)%>%
   ggplot(aes(x = year, y = n)) +
   geom_point(color = "grey") +
   geom_smooth(method="lm")+
-  labs(title = "Number of Days >37.7",
+  labs(title = "Number of Days >32.2 (°C)",
        subtitle = "Tuscaloosa, AL",
        y= "Number of Days",
        x= "Year") + theme_bw(base_size = 15)
 
 
-AL_37.7 %>%
+AL_32.2 %>%
   filter(n>0)%>%
   filter(year>1960)
 
@@ -92,31 +98,31 @@ TN_TMAX %>%
   ggplot(aes(x = year, y = total)) +
   geom_point(color = "grey") +
   geom_smooth(stat="smooth",method="lm")+
-  labs(title = "Annual Highest Temperatures",
+  labs(title = "Annual Highest Temperatures (°C)",
        subtitle = "Clarksville, TN",
-       y= "Daily High Temperature (Celcius)",
+       y= "Temperature °C",
        x= "Year") + theme_bw(base_size = 15)
 
 
-#number of days above 37.7
-TN_37.7 <- TN %>%
+#number of days above 32.2
+TN_32.2 <- TN %>%
   group_by(year=lubridate::floor_date(DATE, "year")) %>%
-  summarise(n=sum(TMAX>37.7))
+  summarise(n=sum(TMAX>32.2))
 
-#plot number of days above 37.7
-TN_37.7 %>%
+#plot number of days above 32.2
+TN_32.2 %>%
   filter(as.integer(year)>1980)%>%
   filter(n>0)%>%
   ggplot(aes(x = year, y = n)) +
   geom_point(color = "grey") +
   geom_smooth(method="lm")+
-  labs(title = "Number of Days >37.7",
+  labs(title = "Number of Days >32.2 (°C)",
        subtitle = "Clarksville, TN",
        y= "Number of Days",
        x= "Year") + theme_bw(base_size = 15)
 
 
-TN_37.7 %>%
+TN_32.2 %>%
   filter(n>0)%>%
   filter(year>1960)
 
@@ -146,31 +152,31 @@ IN_TMAX %>%
   ggplot(aes(x = year, y = total)) +
   geom_point(color = "grey") +
   geom_smooth(stat="smooth",method="lm")+
-  labs(title = "Annual Highest Temperatures",
+  labs(title = "Annual Highest Temperatures (°C)",
        subtitle = "Hoosier National Forest, IN",
-       y= "Daily High Temperature (Celcius)",
+       y= "Temperature °C",
        x= "Year") + theme_bw(base_size = 15)
 
 
-#number of days above 37.7
-IN_37.7 <- IN %>%
+#number of days above 32.2
+IN_32.2 <- IN %>%
   group_by(year=lubridate::floor_date(DATE, "year")) %>%
-  summarise(n=sum(TMAX>37.7))
+  summarise(n=sum(TMAX>32.2))
 
-#plot number of days above 37.7
-IN_37.7 %>%
+#plot number of days above 32.2
+IN_32.2 %>%
   filter(as.integer(year)>1980)%>%
   filter(n>0)%>%
   ggplot(aes(x = year, y = n)) +
   geom_point(color = "grey") +
   geom_smooth(method="lm")+
-  labs(title = "Number of Days >37.7",
+  labs(title = "Number of Days >32.2 (°C)",
        subtitle = "Hoosier National Forest, IN",
        y= "Number of Days",
        x= "Year") + theme_bw(base_size = 15)
 
 
-IN_37.7 %>%
+IN_32.2 %>%
   filter(n>0)%>%
   filter(year>1960)
 
@@ -200,30 +206,30 @@ MI_TMAX %>%
   ggplot(aes(x = year, y = total)) +
   geom_point(color = "grey") +
   geom_smooth(stat="smooth",method="lm")+
-  labs(title = "Annual Highest Temperatures",
+  labs(title = "Annual Highest Temperatures (°C)",
        subtitle = "Chelsea, MI",
-       y= "Daily High Temperature (Celcius)",
+       y= "Temperature °C",
        x= "Year") + theme_bw(base_size = 15)
 
 
-#number of days above 37.7
-MI_37.7 <- MI %>%
+#number of days above 32.2
+MI_32.2 <- MI %>%
   group_by(year=lubridate::floor_date(DATE, "year")) %>%
-  summarise(n=sum(TMAX>37.7))
+  summarise(n=sum(TMAX>32.2))
 
-#plot number of days above 37.7
-MI_37.7 %>%
+#plot number of days above 32.2
+MI_32.2 %>%
   filter(as.integer(year)>1980)%>%
   filter(n>0)%>%
   ggplot(aes(x = year, y = n)) +
   geom_point(color = "grey") +
   geom_smooth(method="lm")+
-  labs(title = "Number of Days >37.7",
+  labs(title = "Number of Days >32.2 (°C)",
        subtitle = "Chelsea, MI",
        y= "Number of Days",
        x= "Year") + theme_bw(base_size = 15)
 
 
-MI_37.7 %>%
+MI_32.2 %>%
   filter(n>0)%>%
   filter(year>1960)
