@@ -97,7 +97,7 @@ AL_mean_plot
 str(TN)  #view structure of data ##
 
 ## create column for julian date##
-TN <- mutate(TN, Julian=format(DATE,"%j"))
+TN <- mutate(TN, julian_date=format(DATE,"%j"))
 
 #omit NA in temperature recordings 
 TN<-TN[complete.cases(TN[,5]),]
@@ -132,14 +132,14 @@ TN_freeze <- TN %>%
   group_by(year=lubridate::floor_date(DATE, "year")) %>%
   summarise(n=sum(TMIN<0))
 
-#plot Number of Days Below -2
+#plot number of days below zero
 TN_freeze %>%
   filter(as.integer(year)>1980)%>%
   filter(n>0)%>%
   ggplot(aes(x = year, y = n)) +
   geom_point(color = "grey") +
   geom_smooth(method="lm")+
-  labs(title = "Number of Days Below -2C",
+  labs(title = "Number of Days Below Freezing",
        subtitle = "Clarksville, TN",
        y= "Number of Days",
        x= "Year") + theme_bw(base_size = 15)
