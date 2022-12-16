@@ -74,10 +74,10 @@ AL_freeze %>%
 
 #Calculate mean temperature by Julian date
 AL_mean <- AL %>%
-  group_by(julian) %>%
+  group_by(julian_date) %>%
   summarise(mean_low = mean(TMIN))
 
-AL_mean$julian_date = as.numeric(as.character(AL_mean$julian))
+AL_mean$julian_date = as.numeric(as.character(AL_mean$julian_date))
 
 #plot mean temperature by julian date
 AL_mean_plot <- ggplot(AL_mean, aes(x= julian_date, y=mean_low))+
