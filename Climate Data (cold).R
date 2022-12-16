@@ -157,7 +157,7 @@ str(IN)  #view structure of data ##
 
 ## create column for julian date##
 ## trying to replicate https://stackoverflow.com/questions/21414847/convert-a-date-vector-into-julian-day-in-r##
-IN <- mutate(IN, Julian=format(DATE,"%j"))
+IN <- mutate(IN, julian_date=format(DATE,"%j"))
 
 #omit NA in temperature recordings 
 IN<-IN[complete.cases(IN[,5]),]
