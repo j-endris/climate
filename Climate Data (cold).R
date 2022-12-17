@@ -206,6 +206,3 @@ IN_freeze %>%
 #Issues to correct
 #how to account for/correct leap days in Julian date count
 #Line 32 - calculation for last freeze of the year
-
-
-https://github.com/j-endris/climate.git
