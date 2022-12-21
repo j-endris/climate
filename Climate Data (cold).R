@@ -29,9 +29,13 @@ AL <- mutate(AL, julian_date=format(DATE,"%j"))
 AL<-AL[complete.cases(AL[,5]),]
 
 #calculate last day below freezing for each year
-AL_last <- AL%>%
-  group_by(julian_date) %>%
-  dplyr::last (AL$TMIN, 0)
+temp<-AL_last <- AL%>%
+  filter(TMIN<0)%>%
+  filter(year(DATE)>1979)%>%
+  filter(julian_date<180)%>%
+  group_by(year(DATE))%>%
+  filter(row_number()==n())
+mean(as.numeric(temp$julian_date))
 
 ## monthly absolute low temp ##
 AL_TMIN <- AL %>%
@@ -97,6 +101,15 @@ AL_mean_plot
 AL_month_mean <- AL %>%
   group_by(month=lubridate::floor_date(DATE, "month")) %>%
   summarise(mean_low = mean(TMIN))
+
+AL_month_mean$month2<-month(AL_month_mean$month)
+sub<-AL_month_mean%>%
+  filter(month2%in%c(1,2,3,4,5))
+
+ggplot(sub,aes(x=month,y=mean_low))+
+  geom_point()+
+  facet_wrap(~month2,scales="free")+
+  geom_smooth(method="lm")
 
 AL_monthly_mean_plot <- ggplot(AL_month_mean, aes(x= month, y=mean_low))+
   geom_point(color = "grey") +
